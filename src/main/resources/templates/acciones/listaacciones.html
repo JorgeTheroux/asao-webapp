@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+
+      lang="es">
+<head th:replace="plantilla/plantilla :: head"></head>
+<body>
+<header th:replace="plantilla/plantilla :: header"></header>
+<div class="container text-center">
+
+    <h1 class="text-secondary border border-success border-top-0">Lista
+        de Acciones</h1>
+    <br/>
+    <div class="row">
+        <div class="col-2">
+            <a class="btn btn-primary" th:href="@{/acciones/formularioacciones}">Agregar Acciones</a>
+        </div>
+        <h2 class="text-secondary"
+            th:text="${mensaje}"></h2>
+
+    </div>
+    <table th:if="${!acciones.isEmpty()}" class="table table-striped table-hover table-sm">
+        <thead class="table-dark table-bordered">
+        <tr>
+            <th scope="col">insectida</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="es: ${acciones}">
+            <td th:text="${es.insectida}"></td>
+            <td>
+                <a sec:authorize="hasAnyAuthority('admin')"
+                        th:href="@{/acciones/modificaracciones/{id} (id=${es.id_accion})}"
+                   class="btn btn-success">Modificar</a>
+                <a sec:authorize="hasAnyAuthority('admin')"
+                        th:href="@{/acciones/borraracciones/{id} (id=${es.id_accion})}" class="btn btn-danger">Eliminar</a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+    <nav th:replace="plantilla/pag-nav :: paginador"></nav>
+</div>
+<footer th:replace="plantilla/plantilla :: footer"></footer>
+</body>
+</html>

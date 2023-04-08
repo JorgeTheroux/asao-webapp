@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="es">
+
+<body>
+<div class="container text-center">
+    <center>
+        <h1 class="text-secondary border border-success border-top-0">Acceso no permitido</h1>
+        <br/>
+        <div class="container py-4 text-center">
+            <div class="card by-danger text-white">
+                <div class="card-header">No tiene permisos</div>
+                <div class="card-body">
+                    <h4 class="card-title">Usuario:
+                        <span class="btn btn-outline-primary" sec:authentication="name"></span>
+                        no tienes permisos
+                    </h4>
+                    <a class="btn btn-outline-primary" th:href="@{/}">Inicio</a> </li>
+                </div>
+            </div>
+        </div>
+    </center>
+</div>
+
+<footer th:replace="plantilla/plantilla :: footer"></footer>
+</body>
+</html>

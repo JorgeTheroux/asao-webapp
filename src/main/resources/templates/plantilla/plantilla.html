@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <title>Spring</title>
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/bootstrap-datepicker3.standalone.min.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/jquery-ui.min.css}" rel="stylesheet">
+    <link th:href="@{/tema/miestilo.css}" rel="stylesheet">
+</head>
+<body>
+<header th:fragment="header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/}">Asesoria y Servicios Agro-Industriales de Occidente</a>
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                    aria-controls="navbarNavDropdown" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown"><a
+                            class="nav-link dropdown-toggle" href="#"
+                            id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false"> Entidades</a>
+                        <ul class="dropdown-menu"
+                            aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" th:href="@{/clientes/lista}">Lista de Clientes</a></li>
+                            <li><a class="dropdown-item" th:href="@{/plagas/lista}">Lista de Plagas</a></li>
+                            <li><a class="dropdown-item" th:href="@{/datosservicio/lista}">Lista de datos servicio</a></li>
+                            <li><a class="dropdown-item" th:href="@{/acciones/lista}">Lista de acciones</a></li>
+                            <li><a class="dropdown-item" th:href="@{/reportes_tecnicos/lista}">Lista de reportes</a></li>
+                            <li><a class="dropdown-item" th:href="@{/hallazgos_plagas/agregar}">Hallazgos Plagas</a></li>
+
+
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="navbar-nav navbar-right">
+
+                    <li>Usuario: <span class="btn btn-outline-primary" sec:authentication="name"></span></li>
+
+                    <li><a class="btn btn-outline-primary" th:href="@{/login}"> Iniciar Sesion</a> </li>
+                    <li><form id="logout" th:action="@{/logout}"  method=post>
+                        <button class="btn btn-outline-primary"
+                                onclick="document.getElementById('logout').submit();"
+                                type="submit">Cerrar Sesion</button>
+                    </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="alert alert-success" th:if="${success !=null}" th:text=${success}></div>
+    <div class="alert alert-danger" th:if="${error !=null}" th:text=${error}></div>
+    <div class="alert alert-warning" th:if="${warning !=null}" th:text=${warning}></div>
+    <div class="alert alert-info" th:if="${info !=null}" th:text=${info}></div>
+</header>
+<div class="container"></div>
+<footer th:fragment="footer">
+    <center>
+        <br/> <img th:src="@{/imagen/logo.jpg}" height="150" width="900"/>
+        <p>Asesoria y Servicios Agro-Industriales de Occidente</p>
+    </center>
+    <script th:src="@{/bootstrap/js/jquery-3.6.3.js}"></script>
+    <script th:src="@{/bootstrap/js/jquery-ui.min.js}"></script>
+    <script th:src="@{/bootstrap/js/popper.min.js}"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/bootstrap/js/bootstrap-datepicker.js}"></script>
+    <script th:src="@{/bootstrap/locales/bootstrap-datepicker.es.min.js}" charset="UTF-8"></script>
+    <script th:src="@{/bootstrap/js/misconfiguraciones.js}"></script>
+
+</footer>
+</body>
+</html>

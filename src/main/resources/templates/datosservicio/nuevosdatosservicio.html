@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="es">
+<head th:replace="plantilla/plantilla :: head"></head>
+<body>
+<header th:replace="plantilla/plantilla :: header"></header>
+<div class="container text-center">
+  <h1 class="text-secondary border border-success border-top-0"
+      th:text="${titulo}"/><br/>
+  <div class="card">
+    <div class="card-body">
+      <form th:action="@{/datosservicio/forminsertar}" th:object=${datosservicio} method="post">
+        <div th:if="${#fields.hasErrors('*')}" class='alert alert-danger' role="alert">
+          Verifique los siguientes errores
+          <ul>
+            <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
+          </ul>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="cliente.id_cliente">Cliente</label>
+              <input type="text" class="form-control" th:field="*{cliente.id_cliente}" id="cliente.id_cliente" name="cliente.id_cliente"
+                     placeholder="Nombre del cliente" required="required">
+
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label for="lugar">Lugar</label>
+              <input type="text" class="form-control" th:field="*{lugar}" id="lugar" name="lugar"
+                     placeholder="Lugar del servicio" required="required">
+
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="fecha">Fecha</label>
+              <div class="input-group date" data-provide="datepicker">
+                <input type="text" class="form-control" th:field="*{fecha}" id="fecha" name="fecha"
+                       placeholder="Fecha del servicio" required="required">
+                <div class="input-group-addon">
+                  <span class="glyphicon glyphicon-th"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="form-group">
+              <label for="tipo_de_servicio">Tipo_de_servicio</label>
+              <input type="text" class="form-control" th:field="*{tipo_de_servicio}" id="tipo_de_servicio" name="tipo_de_servicio"
+                     placeholder="Tipo de servicio realizado" required="required">
+              <div class="input-group-addon">
+                <span class="glyphicon glyphicon-th"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <br/>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </div>
+    </form>
+  </div>
+</div>
+</div>
+<footer th:replace="plantilla/plantilla :: footer"></footer>
+</body>
+</html>

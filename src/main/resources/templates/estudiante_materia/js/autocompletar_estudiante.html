@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="es">
+<body>
+<script type="text/javascript" th:fragment="javascriptreportetecnico">
+    $(document).ready(function(){
+        $("#nombreEstudiante").autocomplete({
+            source: function(request,response){
+              $.ajax({
+                    url:"/hallazgosplagas/buscarreporte/"+request.term,
+                    dataType:"json",
+                    data:{
+                        term: request.term
+                    },
+                    success: function(data){
+                        response($.map(data,function(item){
+                            return{
+                                 value:item.id_cliente,
+                                 label:item.cliente,
+                            };
+                        }));
+                    },
+              });
+            },
+            select: function(event,ui){
+               $("#nombreReportestecnicos").val(ui.item.label);
+               $("#id_reporte").val(ui.item.value);
+               //var linea=$("#registrodatos").html();
+               //linea=linea.replace(/{ID}/g,ui.item.value);
+               //linea=linea.replace(/{NOMBRE}/g,ui.item.label);
+               //$("#cargarplagas tbody").append(linea);
+               return false;
+            }
+        });
+    }
+    );
+</script>
+<script type="text/javascript" th:fragment="javascriptplaga">
+    $(document).ready(function(){
+        $("#nombrePlaga").autocomplete({
+            source: function(request,response){
+              $.ajax({
+                    url:"/hallazgosplagas/buscarplaga/"+request.term,
+                    dataType:"json",
+                    data:{
+                        term: request.term
+                    },
+                    success: function(data){
+                        response($.map(data,function(item){
+                            return{
+                                 value:item.id_plaga,
+                                 label:item.nombre,
+                            };
+                        }));
+                    },
+              });
+            },
+            select: function(event,ui){
+               $("#nombrePlaga").val(ui.item.label);
+               $("#idPlaga").val(ui.item.value);
+               //var linea=$("#registrodatos").html();
+               //linea=linea.replace(/{ID}/g,ui.item.value);
+               //linea=linea.replace(/{NOMBRE}/g,ui.item.label);
+               //$("#cargarmaterias tbody").append(linea);
+               return false;
+            }
+        });
+    }
+    );
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+        lang="es">
+<body>
+    <table th:fragment="hallazgosplagas" class="d-none">
+      <tbody id="registrodatos">
+          <tr id="fila_{ID}">
+              <td class="d-none">
+                <input type="hidden" value="{ID}" name="item_id"/>
+              </td>
+              <td>{REPORTE}</td>
+              <td>{PLAGAS}</td>
+          </tr>
+      </tbody>
+    </table>
+</body>
+</html>

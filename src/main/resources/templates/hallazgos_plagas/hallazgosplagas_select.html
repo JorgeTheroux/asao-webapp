@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="es">
+<head th:replace="plantilla/plantilla :: head"></head>
+<body>
+<header th:replace="plantilla/plantilla :: header"></header>
+<div class="container text-center">
+    <div class="row">
+        <h2 class="text-secondary"
+            th:text="${mensaje}"></h2>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <form th:action="@{/hallazgos_plagas/forminsertarselect}" th:object=${hallazgosplagas} method="post">
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="id_reporte">ID Reporte</label>
+                            <select class="form-control" th:field="*{id_reporte}" id="id_reporte" name="id_reporte" required="requiered">
+                                <option th:each="sel : ${selectreportestecnicos}" th:value="${sel.id_reporte}" th:text="${sel.id_reporte}"/>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="id_plaga">Nombre Plaga</label>
+                            <select class="form-control" th:field="*{id_plaga}" id="id_plaga" name="id_plaga"
+                                   placeholder="Plaga por nombre" required="required">
+                                <option th:each="selM : ${selectplagas}" th:value="${selM.id_plaga}" th:text="${selM.plaga}"/>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <br/>
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                    </div>
+
+                </div>
+
+            </form>
+            <br/>
+            <a th:href="@{/hallazgos_plagas/formguardar}" class="btn btn-danger">Guardar</a>
+            <table th:if="${!lista.isEmpty()}" class="table table-striped table-hover table-sm">
+                <thead class="table-dark table-bordered">
+                <tr>
+                    <th scope="col">ID Reporte</th>
+                    <th scope="col">Nombre Plaga</th>
+                    <th scope="col">Operaciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="datos: ${lista}">
+                    <td th:text="${datos.id_reporte}"></td>
+                    <td th:text="${datos.nombre_plagas}"></td>
+                    <td>
+                        <a th:href="@{/hallazgos_plagas/borrar/{id} (id=${datos.id_reporte})}"
+                           class="btn btn-danger">Eliminar</a>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<footer th:replace="plantilla/plantilla :: footer"></footer>
+
+</body>
+</html>
